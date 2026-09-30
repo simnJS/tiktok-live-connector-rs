@@ -1,0 +1,12 @@
+[package]
+name = "codegen"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+anyhow = "1.0.104"
+heck = "0.5.0"
+prost-build = "0.14.4"
+prost-types = "0.14.4"
+protox = "0.9.1"

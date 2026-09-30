@@ -1,0 +1,53 @@
+[package]
+name = "tiktok-live-connector"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+description = "TikTok LIVE API for Rust: real-time chat, gift, like, follow and viewer events from any TikTok livestream. A faithful port of the Node.js TikTok-Live-Connector."
+license = "AGPL-3.0-only"
+repository = "https://github.com/simnJS/tiktok-live-connector-rs"
+homepage = "https://github.com/simnJS/tiktok-live-connector-rs"
+readme = "README.md"
+keywords = ["tiktok", "tiktok-live", "webcast", "livestream", "websocket"]
+categories = ["api-bindings", "asynchronous", "network-programming"]
+exclude = ["codegen/", "proto/"]
+
+[features]
+default = []
+## Derive `serde::Serialize`/`Deserialize` (camelCase, like the Node library's JSON) on every protobuf message and event payload.
+serde = ["bytes/serde"]
+## The deprecated `WebcastPushConnection` (flattened JSON events), for code migrating from 1.x.
+legacy = ["serde"]
+
+[dependencies]
+async-trait = "0.1.92"
+base64 = "0.23.1"
+bytes = "1.12.1"
+flate2 = "1.1.10"
+futures-util = { version = "0.3.34", default-features = false, features = ["sink", "std"] }
+indexmap = "2.14.2"
+percent-encoding = "2.3.2"
+prost = "0.14.4"
+rand = "0.10.3"
+regex = "1.13.1"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "gzip", "deflate", "json", "http2"] }
+serde = { version = "1.0.229", features = ["derive", "rc"] }
+serde_json = "1.0.151"
+thiserror = "2.0.21"
+tokio = { version = "1.53.1", features = ["rt", "macros", "sync", "time", "net"] }
+tokio-tungstenite = { version = "0.30.0", features = ["rustls-tls-webpki-roots"] }
+tracing = "0.1.44"
+url = "2.5.8"
+
+[dev-dependencies]
+tokio = { version = "1.53.1", features = ["full"] }
+
+[workspace]
+members = ["codegen"]
+
+[package.metadata.docs.rs]
+all-features = true
+
+[[example]]
+name = "legacy"
+required-features = ["legacy"]
